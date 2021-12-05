@@ -1,13 +1,12 @@
 <template>
-  <div>
-    <h1>Hellow mediumclone</h1>
-    <router-view />
+  <div class='home'>
+    <h3>Home page</h3>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'Home'
 }
 </script>
 

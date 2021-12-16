@@ -14,6 +14,7 @@
                 type='text'
                 placeholder='Username'
                 class='form-control form-control-lg'
+                v-model='username'
               >
             </fieldset>
 
@@ -22,6 +23,7 @@
                 type='text'
                 placeholder='Email'
                 class='form-control form-control-lg'
+                v-model='email'
               >
             </fieldset>
 
@@ -30,6 +32,7 @@
                 type='password'
                 placeholder='Password'
                 class='form-control form-control-lg'
+                v-model='password'
               >
             </fieldset>
 
@@ -48,6 +51,13 @@
 <script>
 export default {
   name: 'AppRegister',
+  data () {
+    return {
+      email: '',
+      password: '',
+      username: ''
+    }
+  },
   computed: {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting
@@ -57,12 +67,13 @@ export default {
     onSubmit() {
       this.$store
         .dispatch('register', {
-          email: 'cwegwgwck@gwecwe.com',
-          username: 'gegsdcck',
-          password: 'gdsgsdggrecck'
+          email: this.email,
+          username: this.username,
+          password: this.password
         })
         .then(result => {
           console.log('result from register action', result)
+          this.$router.push({name: 'home'})
         })
     }
   }

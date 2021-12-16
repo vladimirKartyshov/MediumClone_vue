@@ -55,9 +55,15 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('submitted form')
-      // this.$store.commit('registerStart')
-      this.$store.dispatch('register')
+      this.$store
+        .dispatch('register', {
+          email: 'cwegwgwck@gwecwe.com',
+          username: 'gegsdcck',
+          password: 'gdsgsdggrecck'
+        })
+        .then(result => {
+          console.log('result from register action', result)
+        })
     }
   }
 }

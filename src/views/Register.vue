@@ -56,7 +56,8 @@ export default {
   methods: {
     onSubmit() {
       console.log('submitted form')
-      this.$store.commit('registerStart')
+      // this.$store.commit('registerStart')
+      this.$store.dispatch('register')
     }
   }
 }

@@ -7,7 +7,10 @@
           <p class='text-xs-center'>
             <router-link :to="{name: 'login'}">Have an account?</router-link>
           </p>
-          <app-validation-errors />
+          <app-validation-errors
+            v-if='validationErrors'
+            :validation-errors='validationErrors'
+          />
           <form @submit.prevent='onSubmit'>
             <fieldset class='form-group'>
               <input
@@ -67,7 +70,9 @@ export default {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting
     },
-
+    validationErrors() {
+      return this.$store.state.auth.validationErrors
+    }
   },
   methods: {
     onSubmit() {

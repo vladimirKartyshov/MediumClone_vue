@@ -77,6 +77,7 @@ export default {
       // currentUser: state => state.auth.currentUser,
       // isLoggedIn: state => state.auth.isLoggedIn
     // }),
+//================================================================
     // currentUser() {
     //   return this.$store.getters[gettersTypes.currentUser]
     // },

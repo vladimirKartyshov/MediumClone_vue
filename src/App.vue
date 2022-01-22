@@ -1,13 +1,18 @@
 <template>
   <div>
-    <h1>Hellow mediumclone</h1>
+    <app-topbar/>
     <router-view />
   </div>
 </template>
 
 <script>
+import AppTopbar from './components/Topbar'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    AppTopbar
+  }
 }
 </script>
 

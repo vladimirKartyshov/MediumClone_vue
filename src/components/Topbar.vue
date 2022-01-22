@@ -1,23 +1,29 @@
 <template>
   <nav class="navbar navbar-light">
     <div class="container">
-      <router-link class="navbar-brand" :to="{name: 'home'}">
+      <router-link class="navbar-brand" :to="{name: 'home'}"
+      >
         MediumClone
       </router-link>
       <ul class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'home'}">Home</router-link>
+          <router-link class="nav-link" :to="{name: 'home'}"
+          >
+            Home
+          </router-link>
         </li>
         <template v-if="isLoggedIn">
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'createArticle'}">
+            <router-link class="nav-link" :to="{name: 'createArticle'}"
+            >
               <i class="ion-compose" />
               &nbsp; New Article
             </router-link>
           </li>
 
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'settings'}">
+            <router-link class="nav-link" :to="{name: 'settings'}"
+            >
               <i class="ion-gear-a" />
               &nbsp; Settings
             </router-link>
@@ -34,14 +40,16 @@
             </router-link>
           </li>
         </template>
-        <template v-if="!isLoggedIn">
+        <template v-if="isAnonymous">
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'login'}">
+            <router-link class="nav-link" :to="{name: 'login'}"
+            >
               Sign in
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'register'}">
+            <router-link class="nav-link" :to="{name: 'register'}"
+            >
               Sign up
             </router-link>
           </li>
@@ -52,15 +60,32 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {gettersTypes} from '../store/modules/auth'
+import {mapGetters} from 'vuex'
+// import {mapState} from 'vuex'
+
 
 export default {
   name: 'AppTopbar',
   computed: {
-    ...mapState({
-      currentUser: state => state.auth.currentUser,
-      isLoggedIn: state => state.auth.isLoggedIn
+    ...mapGetters({
+      currentUser: gettersTypes.currentUser,
+      isLoggedIn: gettersTypes.isLoggedIn,
+      isAnonymous: gettersTypes.isAnonymous
     })
+    // ...mapState({
+      // currentUser: state => state.auth.currentUser,
+      // isLoggedIn: state => state.auth.isLoggedIn
+    // }),
+    // currentUser() {
+    //   return this.$store.getters[gettersTypes.currentUser]
+    // },
+    // isLoggedIn() {
+    //   return this.$store.getters[gettersTypes.isLoggedIn]
+    // },
+    // isAnonymous() {
+    //   return this.$store.getters[gettersTypes.isAnonymous]
+    // }
   }
 }
 </script>

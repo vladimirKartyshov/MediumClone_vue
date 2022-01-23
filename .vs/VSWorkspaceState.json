@@ -5,9 +5,12 @@
     "\\public",
     "\\src",
     "\\src\\components",
+    "\\src\\helpers",
     "\\src\\router",
+    "\\src\\store",
+    "\\src\\store\\modules",
     "\\src\\views"
   ],
-  "SelectedNode": "\\src\\main.js",
+  "SelectedNode": "\\api\\axios.js",
   "PreviewInSolutionExplorer": false
 }

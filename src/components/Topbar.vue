@@ -69,7 +69,7 @@ export default {
   name: 'AppTopbar',
   computed: {
     ...mapGetters({
-      currentUser: gettersTypes.currentUser,///// vsc
+      currentUser: gettersTypes.currentUser,
       isLoggedIn: gettersTypes.isLoggedIn,
       isAnonymous: gettersTypes.isAnonymous
     })

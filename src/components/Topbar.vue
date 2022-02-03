@@ -1,15 +1,19 @@
 <template>
   <nav class="navbar navbar-light">
     <div class="container">
-      <router-link class="navbar-brand" :to="{name: 'globalFeed'}">
+      <router-link class="navbar-brand" :to="{name: 'globalFeed'}"
+      >
         MediumClone
       </router-link>
       <ul class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
           <router-link class="nav-link" :to="{name: 'globalFeed'}"
-          >Home</router-link
+          >
+            Home
+          </router-link
           >
         </li>
+
         <template v-if="isLoggedIn">
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'createArticle'}">
@@ -21,7 +25,8 @@
           <li class="nav-item">
             <router-link class="nav-link" :to="{name: 'settings'}">
               <i class="ion-gear-a" />
-              &nbsp; Settings
+              &nbsp;
+              Settings
             </router-link>
           </li>
 
@@ -36,14 +41,17 @@
             </router-link>
           </li>
         </template>
+
         <template v-if="isAnonymous">
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'login'}">
+            <router-link class="nav-link" :to="{name: 'login'}"
+            >
               Sign in
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{name: 'register'}">
+            <router-link class="nav-link" :to="{name: 'register'}"
+            >
               Sign up
             </router-link>
           </li>
@@ -57,7 +65,6 @@
 import {gettersTypes} from '../store/modules/auth'
 import {mapGetters} from 'vuex'
 // import {mapState} from 'vuex'
-
 
 export default {
   name: 'AppTopbar',

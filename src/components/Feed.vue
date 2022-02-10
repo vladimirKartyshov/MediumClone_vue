@@ -13,7 +13,7 @@
           <router-link
             :to="{name: 'userProfile', params: {slug: article.author.username}}"
           >
-            <img :src="article.author.image" />
+            <img :src="article.author.image"  alt=''/>
           </router-link>
           <div class="info">
             <router-link
@@ -38,7 +38,12 @@
           TAG LIST
         </router-link>
       </div>
-      PAGINATION
+      <app-pagination
+        :total='total'
+        :limit='limit'
+        :current-page='currentPage'
+        :url='url'
+      />
     </div>
   </div>
 </template>
@@ -46,6 +51,7 @@
 <script>
 import {mapState} from 'vuex'
 import {actionTypes} from '../store/modules/feed'
+import AppPagination from '@/components/Pagination'
 
 export default {
   name: 'AppFeed',
@@ -53,6 +59,17 @@ export default {
     apiUrl: {
       type: String,
       required: true
+    }
+  },
+  components: {
+    AppPagination
+  },
+  data() {
+    return {
+      total: 500,
+      limit: 10,
+      currentPage: 5,
+      url: '/'
     }
   },
   computed: {

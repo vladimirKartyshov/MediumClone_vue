@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
-    <div v-if="error">Something is broken</div>
+    <app-loading v-if='isLoading'/>
+    <app-error-message/>
 
     <div class="sidebar" v-if="popularTags">
       <p>Popular Tags</p>
@@ -22,9 +22,12 @@
 <script>
 import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/popularTags'
+import AppLoading from './Loading'
+import AppErrorMessage from './ErrorMessage'
 
 export default {
   name: 'AppPopularTags',
+  components: {AppErrorMessage, AppLoading},
   computed: {
     ...mapState({
       isLoading: state => state.popularTags.isLoading,

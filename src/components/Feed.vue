@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
-    <div v-if="error">Something bad happened</div>
-
+    <app-loading v-if='isLoading'/>
+    <app-error-message :message="'foo is broken'"/>
     <div v-if="feed">
       <div
         class="article-preview"
@@ -54,6 +53,8 @@ import {actionTypes} from '../store/modules/feed'
 import AppPagination from '@/components/Pagination'
 import {limit, total} from '../helpers/vars'
 import {stringify, parseUrl} from 'query-string'
+import AppLoading from './Loading'
+import AppErrorMessage from './ErrorMessage'
 
 export default {
   name: 'AppFeed',
@@ -64,6 +65,8 @@ export default {
     }
   },
   components: {
+    AppErrorMessage,
+    AppLoading,
     AppPagination
   },
   data() {

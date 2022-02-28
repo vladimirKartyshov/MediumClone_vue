@@ -1,6 +1,6 @@
 <template>
   <div class='home-page'>
-    BANNER
+    <app-banner/>
     <div class='container page'>
       <div class='row'>
         <div class='col-md-9'>
@@ -17,10 +17,12 @@
 <script>
 import AppFeed from '../components/Feed'
 import AppPopularTags from '../components/PopularTags'
+import AppBanner from '../components/Banner'
 
 export default {
   name: 'AppGlobalFeed',
   components: {
+    AppBanner,
     AppFeed,
     AppPopularTags
   },

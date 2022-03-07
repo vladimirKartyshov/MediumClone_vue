@@ -4,6 +4,7 @@
     <div class='container page'>
       <div class='row'>
         <div class='col-md-9'>
+          <app-feed-toggle :tag-name='tagName'/>
           <app-feed :api-url='apiUrl' />
         </div>
         <div class='col-md-3'>
@@ -18,18 +19,22 @@
 import AppFeed from '../components/Feed'
 import AppPopularTags from '../components/PopularTags'
 import AppBanner from '../components/Banner'
+import AppFeedToggle from './FeedToggle'
 
 export default {
   name: 'AppTagFeed',
   components: {
     AppBanner,
     AppFeed,
-    AppPopularTags
+    AppPopularTags,
+    AppFeedToggle
   },
   computed: {
+    tagName() {
+      return this.$route.params.slug
+    },
     apiUrl() {
-      const tagName = this.$route.params.slug
-      return `/articles?tag=${tagName}`
+      return `/articles?tag=${this.tagName}`
     }
   }
 }

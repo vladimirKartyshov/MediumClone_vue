@@ -34,7 +34,7 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>Read more...</span>
-          TAG LIST
+          <app-tag-list :tags='article.tagList' />
         </router-link>
       </div>
       <app-pagination
@@ -55,6 +55,7 @@ import {limit, total} from '../helpers/vars'
 import {stringify, parseUrl} from 'query-string'
 import AppLoading from './Loading'
 import AppErrorMessage from './ErrorMessage'
+import AppTagList from './TagList'
 
 export default {
   name: 'AppFeed',
@@ -65,6 +66,7 @@ export default {
     }
   },
   components: {
+    AppTagList,
     AppErrorMessage,
     AppLoading,
     AppPagination

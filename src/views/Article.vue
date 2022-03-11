@@ -44,7 +44,7 @@
           <div>
             <p>{{ article.body }}</p>
           </div>
-          TAG LIST IS HERE
+          <app-tag-list :tags='article.tagList' />
         </div>
       </div>
     </div>
@@ -57,10 +57,12 @@ import {gettersTypes as authGetterTypes} from '../store/modules/auth'
 import {actionTypes as articleActionTypes} from '../store/modules/article'
 import AppLoading from '../components/Loading'
 import AppErrorMessage from '../components/ErrorMessage'
+import AppTagList from '../components/TagList'
 
 export default {
   name: 'AppArticle',
   components: {
+    AppTagList,
     AppLoading,
     AppErrorMessage
   },

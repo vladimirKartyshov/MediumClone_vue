@@ -7,20 +7,20 @@
           <router-link
             :to="{name: 'userProfile', params: {slug: article.author.username}}"
           >
-            <img :src="article.author.image"  alt=''/>
+            <img :src="article.author.image" alt="" />
           </router-link>
           <div class="info">
             <router-link
               :to="{
                 name: 'userProfile',
-                params: {slug: article.author.username}
+                params: {slug: article.author.username},
               }"
             >
               {{ article.author.username }}
             </router-link>
             <span class="date">{{ article.createdAt }}</span>
           </div>
-          <span v-if='isAuthor'>
+          <span v-if="isAuthor">
             <router-link
               class="btn btn-outline-secondary btn-sm"
               :to="{name: 'editArticle', params: {slug: article.slug}}"
@@ -28,7 +28,10 @@
               <i class="ion-edit" />
               Edit Article
             </router-link>
-            <button class="btn btn-outline-danger btn-sm" @click='deleteArticle'>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              @click="deleteArticle"
+            >
               <i class="ion-trash-a" />
               Delete Article
             </button>
@@ -44,7 +47,7 @@
           <div>
             <p>{{ article.body }}</p>
           </div>
-          <app-tag-list :tags='article.tagList' />
+          <app-tag-list :tags="article.tagList" />
         </div>
       </div>
     </div>
@@ -64,42 +67,41 @@ export default {
   components: {
     AppTagList,
     AppLoading,
-    AppErrorMessage
+    AppErrorMessage,
   },
   computed: {
     ...mapState({
-      isLoading: state => state.article.isLoading,
-      article: state => state.article.data,
-      error: state => state.article.error
+      isLoading: (state) => state.article.isLoading,
+      article: (state) => state.article.data,
+      error: (state) => state.article.error,
     }),
     ...mapGetters({
-      currentUser: authGetterTypes.currentUser
+      currentUser: authGetterTypes.currentUser,
     }),
     isAuthor() {
       if (!this.currentUser || !this.article) {
         return false
       }
       return this.currentUser.username === this.article.author.name
-    }
+    },
   },
   mounted() {
     this.$store.dispatch(articleActionTypes.getArticle, {
-      slug: this.$route.params.slug
+      slug: this.$route.params.slug,
     })
   },
   methods: {
     deleteArticle() {
-      this.$store.dispatch(articleActionTypes.deleteArticle, {
-        slug: this.$route.params.slug
-        } )
-      .then(() => {
-        this.$router.push({name: 'globalFeed'})
-      })
-      }
-    }
+      this.$store
+        .dispatch(articleActionTypes.deleteArticle, {
+          slug: this.$route.params.slug,
+        })
+        .then(() => {
+          this.$router.push({name: 'globalFeed'})
+        })
+    },
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

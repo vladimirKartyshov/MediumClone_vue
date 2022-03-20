@@ -1,39 +1,48 @@
 <template>
-  <div>
-    Create Article
-    <app-article-form
-      :initial-values="initialValues"
-      :errors="validationErrors"
-      :is-submitting="isSubmitting"
-      @articleSubmit="onSubmit"
-    />
-  </div>
+  <app-article-form
+    :initialValues="initialValues"
+    :errors="validationErrors"
+    :isSubmitting="isSubmitting"
+    @articleSubmit="onSubmit"
+  >
+  </app-article-form>
 </template>
 
 <script>
-import AppArticleForm from '../components/ArticleForm'
+import {mapState} from 'vuex'
+
+import AppArticleForm from '@/components/ArticleForm'
+import {actionTypes} from '@/store/modules/createArticle'
 
 export default {
-  name: 'AppCreateArticle',
-  components: {AppArticleForm},
+  name: 'McvCreateArticle',
+  components: {
+    AppArticleForm
+  },
   data() {
     return {
       initialValues: {
         title: '',
         description: '',
         body: '',
-        tagList: [],
-      },
-      validationErrors: null,
-      isSubmitting: false,
+        tagList: []
+      }
     }
   },
-  methods: {
-    onSubmit(data) {
-      console.log('onSubmit in createArticle', data)
-    },
+  computed: {
+    ...mapState({
+      isSubmitting: state => state.createArticle.isSubmitting,
+      validationErrors: state => state.createArticle.validationErrors
+    })
   },
+  methods: {
+    onSubmit(articleInput) {
+      this.$store
+        .dispatch(actionTypes.createArticle, {articleInput})
+        .then(article => {
+          this.$router.push({name: 'article', params: {slug: article.slug}})
+        })
+    }
+  }
 }
 </script>
-
-<style></style>

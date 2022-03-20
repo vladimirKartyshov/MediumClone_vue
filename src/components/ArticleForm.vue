@@ -3,7 +3,7 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-10 offset-md-1 col-xs-12">
-          <app-validation-errors v-if="errors" />
+          <app-validation-errors v-if="errors" :validation-errors="errors" />
           <form @submit.prevent="onSubmit">
             <fieldset>
               <fieldset class="form-group">
@@ -58,27 +58,29 @@
 import AppValidationErrors from '../components/ValidationErrors.vue'
 export default {
   name: 'AppArticleForm',
-  components: {AppValidationErrors},
   props: {
     initialValues: {
       type: Object,
-      required: true,
+      required: true
     },
     errors: {
       type: Object,
-      required: false,
+      required: false
     },
     isSubmitting: {
       type: Boolean,
-      required: true,
-    },
+      required: true
+    }
+  },
+  components: {
+    AppValidationErrors
   },
   data() {
     return {
       title: '',
       description: '',
       body: '',
-      tagList: '',
+      tagList: ''
     }
   },
   methods: {
@@ -87,12 +89,10 @@ export default {
         title: this.title,
         description: this.description,
         body: this.body,
-        tagList: this.tagList,
+        tagList: this.tagList.split(' ')
       }
       this.$emit('articleSubmit', form)
-    },
-  },
+    }
+  }
 }
 </script>
-
-<style></style>

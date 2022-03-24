@@ -15,9 +15,9 @@ import AppArticleForm from '@/components/ArticleForm'
 import {actionTypes} from '@/store/modules/createArticle'
 
 export default {
-  name: 'McvCreateArticle',
+  name: 'AppCreateArticle',
   components: {
-    AppArticleForm
+    AppArticleForm,
   },
   data() {
     return {

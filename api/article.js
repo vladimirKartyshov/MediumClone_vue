@@ -1,21 +1,30 @@
 import axios from '/api/axios'
 
-const getArticle = slug => {
-  return axios.get(`/articles/${slug}`).then(response => response.data.article)
+const getArticle = (slug) => {
+  return axios
+    .get(`/articles/${slug}`)
+    .then((response) => response.data.article)
 }
 
-const createArticle = articleInput => {
+const createArticle = (articleInput) => {
   return axios
     .post('/articles', {article: articleInput})
-    .then(response => response.data.article)
+    .then((response) => response.data.article)
 }
 
-const deleteArticle = slug => {
+const deleteArticle = (slug) => {
   return axios.delete(`/articles/${slug}`)
+}
+
+const updateArticle = (slug, articleInput) => {
+  return axios
+    .put(`/articles/${slug}`, articleInput)
+    .then((response) => response.data.article)
 }
 
 export default {
   getArticle,
   deleteArticle,
-  createArticle
+  createArticle,
+  updateArticle,
 }

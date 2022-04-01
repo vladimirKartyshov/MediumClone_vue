@@ -82,7 +82,7 @@ export default {
       if (!this.currentUser || !this.article) {
         return false
       }
-      return this.currentUser.username === this.article.author.name
+      return this.currentUser.username === this.article.author.username
     },
   },
   mounted() {

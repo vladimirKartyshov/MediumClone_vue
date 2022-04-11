@@ -74,7 +74,7 @@
 
 <script>
 import {mapState, mapGetters} from 'vuex'
-import {getterTypes as authGetterTypes} from '@/store/modules/auth'
+import {gettersTypes as authGetterTypes} from '@/store/modules/auth'
 import {actionTypes as authActionTypes} from '@/store/modules/auth'
 import AppValidationErrors from '@/components/ValidationErrors'
 

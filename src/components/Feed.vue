@@ -1,7 +1,7 @@
 <template>
   <div>
-    <app-loading v-if='isLoading'/>
-    <app-error-message :message="'foo is broken'"/>
+    <app-loading v-if="isLoading" />
+    <app-error-message :message="'foo is broken'" />
     <div v-if="feed">
       <div
         class="article-preview"
@@ -12,20 +12,26 @@
           <router-link
             :to="{name: 'userProfile', params: {slug: article.author.username}}"
           >
-            <img :src="article.author.image"  alt=''/>
+            <img :src="article.author.image" alt="" />
           </router-link>
           <div class="info">
             <router-link
               :to="{
                 name: 'userProfile',
-                params: {slug: article.author.username}
+                params: {slug: article.author.username},
               }"
             >
               {{ article.author.username }}
             </router-link>
             <span class="date">{{ article.createdAt }}</span>
           </div>
-          <div class="pull-xs-right">ADD TO FAVORITES</div>
+          <div class="pull-xs-right">
+            <app-add-to-favorites
+              :is-favorited="article.favorited"
+              :article-slug="article.slug"
+              :favorites-count="article.favoritesCount"
+            />
+          </div>
         </div>
         <router-link
           :to="{name: 'article', params: {slug: article.slug}}"
@@ -34,14 +40,14 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span>Read more...</span>
-          <app-tag-list :tags='article.tagList' />
+          <app-tag-list :tags="article.tagList" />
         </router-link>
       </div>
       <app-pagination
-        :total='total'
-        :limit='limit'
-        :current-page='currentPage'
-        :url='baseUrl'
+        :total="total"
+        :limit="limit"
+        :current-page="currentPage"
+        :url="baseUrl"
       />
     </div>
   </div>
@@ -56,33 +62,35 @@ import {stringify, parseUrl} from 'query-string'
 import AppLoading from './Loading'
 import AppErrorMessage from './ErrorMessage'
 import AppTagList from './TagList'
+import AppAddToFavorites from './AddToFavorites'
 
 export default {
   name: 'AppFeed',
   props: {
     apiUrl: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     AppTagList,
     AppErrorMessage,
     AppLoading,
-    AppPagination
+    AppPagination,
+    AppAddToFavorites
   },
   data() {
     return {
       total,
       limit,
-      url: '/'
+      url: '/',
     }
   },
   computed: {
     ...mapState({
-      isLoading: state => state.feed.isLoading,
-      feed: state => state.feed.data,//data,
-      error: state => state.feed.error
+      isLoading: (state) => state.feed.isLoading,
+      feed: (state) => state.feed.data, //data,
+      error: (state) => state.feed.error,
     }),
     currentPage() {
       return Number(this.$route.query.page || '1')
@@ -92,13 +100,13 @@ export default {
     },
     offset() {
       return this.currentPage * limit - limit
-    }
+    },
   },
   watch: {
     currentPage() {
       console.log('currentPage changed')
       this.fetchFeed()
-    }
+    },
   },
   mounted() {
     console.log('init feed')
@@ -110,16 +118,14 @@ export default {
       const stringifiedParams = stringify({
         limit,
         offset: this.offset,
-        ...parsedUrl.query
+        ...parsedUrl.query,
       })
       const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
       console.log(apiUrlWithParams)
       this.$store.dispatch(actionTypes.getFeed, {apiUrl: apiUrlWithParams})
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
